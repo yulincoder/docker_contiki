@@ -5,6 +5,7 @@ services:
 
 script:
   - docker build -t contiki .
+  - docker run contiki /bin/sh -c "cd regression-tests; make"
 
 notifications:
     email: false
