@@ -63,13 +63,14 @@ RUN git clone https://github.com/cc65/cc65 /tmp/cc65 && \
 
 
 # Compile cooja.jar only when it's going to be needed
-RUN git clone https://github.com/contiki-os/contiki
-RUN cd contiki && git submodule update --init 
 RUN apt-get install -y ant 
 RUN apt-get install -y openjdk-7-jdk
-WORKDIR contiki
-ENV JAVA_TOOL_OPTIONS -Dfile.encoding=UTF8
 ENV JAVA_HOME /usr/lib/jvm/default-java
+ENV JAVA_TOOL_OPTIONS -Dfile.encoding=UTF8
+RUN git clone https://github.com/contiki-os/contiki
+
+WORKDIR contiki
+RUN git submodule update --init 
 RUN ant -q -f tools/cooja/build.xml jar
 #WORKDIR regression-tests
 #RUN apt-get install -y libncurses5 zlib1g
