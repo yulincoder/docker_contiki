@@ -5,7 +5,25 @@ services:
 
 script:
   - docker build -t contiki .
-  - docker run contiki /bin/sh -c "cd regression-tests; make"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-doxygen RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-compile-base RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-compile-tools RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-collect RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-collect-lossy RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-rpl RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-rime RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-ipv6 RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-ip64 RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-hello-world RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-base RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-shell RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-elfloader RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-ipv6-apps RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-compile-8051-ports RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-compile-arm-apcs-ports RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-compile-6502-ports RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-slip-radio RUNALL=true summary"
+  - docker run contiki /bin/sh -c "make -C regression-tests/??-llsec RUNALL=true summary"
 
 notifications:
     email: false
